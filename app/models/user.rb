@@ -46,6 +46,26 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
+  
+  def api_login
+    Docusign::Config[:crypt_key].decrypt self[:api_login]
+  end
+  
+  def api_login=(value)
+    self[:api_login] = Docusign::Config[:crypt_key].encrypt value
+  end
+  
+  def api_password
+    Docusign::Config[:crypt_key].decrypt self[:api_password]
+  end
+  
+  def api_password=(value)
+    self[:api_password] = Docusign::Config[:crypt_key].encrypt value
+  end
+  
+  def credentials?
+    api_login && api_password
+  end
 
   protected
     

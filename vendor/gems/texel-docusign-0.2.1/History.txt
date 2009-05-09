@@ -1,0 +1,3 @@
+=== 0.1.2 / 2009-02-08
+
+* Fully functional first release.

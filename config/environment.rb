@@ -7,7 +7,6 @@ RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'thoughtbot-shoulda', :source => 'http://gems.github.com', :lib => 'shoulda'
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
@@ -16,7 +15,10 @@ Rails::Initializer.run do |config|
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
   # Specify gems that this application depends on and have them installed with rake gems:install
-  # config.gem "bj"
+  config.gem "texel-docusign", :version => '>=0.2.2', :source => 'http://gems.github.com', :lib => 'docusign'
+  config.gem 'thoughtbot-shoulda', :source => 'http://gems.github.com', :lib => 'shoulda'
+  config.gem 'ezcrypto'
+  
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"

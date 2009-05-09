@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>Rails Sender</title>
+  </head>
+  <body>
+    <%= render :partial => '/users/user_bar' %>
+    <%- [flash[:error], flash[:notice]].compact.each do |flash| -%>
+      <p>
+        <%= flash %>
+      </p>
+    <%- end -%>
+    <%= yield %>
+  </body>
+</html>
