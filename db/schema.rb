@@ -9,7 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090509032311) do
+ActiveRecord::Schema.define(:version => 20090510012243) do
+
+  create_table "envelopes", :force => true do |t|
+    t.string   "account_id"
+    t.string   "recipient_name"
+    t.string   "recipient_email"
+    t.string   "subject"
+    t.string   "email_blurb"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.string   "ds_id"
+    t.string   "ds_status"
+    t.datetime "status_updated_at"
+    t.string   "state"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40

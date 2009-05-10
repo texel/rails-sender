@@ -1,14 +1,26 @@
 <html>
   <head>
     <title>Rails Sender</title>
+    <%= stylesheet_link_tag 'docusign.css' %>
   </head>
   <body>
-    <%= render :partial => '/users/user_bar' %>
-    <%- [flash[:error], flash[:notice]].compact.each do |flash| -%>
-      <p>
-        <%= flash %>
-      </p>
-    <%- end -%>
-    <%= yield %>
+    <div id="wrapper">
+      <div id="header">
+        <%= render :partial => '/users/user_bar' %>
+        <p>Docusign Rails Sender</p>
+      </div>
+      <div id="top_menu">
+        <%- if current_user && current_user.credentials? -%>
+        <ul>
+          <li class="<%= "selected" if controller_name == "envelopes" %>">Envelopes</li>
+          <li>Address Book</li>
+        </ul>
+        <%- end -%>
+      </div>
+      <div id="content">
+        <%= render :partial => '/shared/flash_messages' %>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

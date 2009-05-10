@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   include AuthenticatedSystem
   
   layout "docusign"
+  
+  skip_before_filter :login_required, :credentials_required, :only => [:new, :create]
 
   # render new.rhtml
   def new

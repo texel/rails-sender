@@ -1,0 +1,112 @@
+* { 
+	margin: 0;
+	padding: 0;
+}
+
+a { 
+	outline: none;
+}
+
+h1, h2, h3, h4, h5, h6, input, select, textarea { 
+	font-size: 100%;
+}
+
+body {
+/*	background: #fff url("/images/grid_h.gif") 41px 0 repeat; */
+/*	background: #fff url("/images/grid_v.gif"); */
+	font: normal 62.5% 'Helvetica Neue', Helvetica, Arial, sans-serif; /* normalize font size across browsers */
+	line-height: 18px;	
+}
+
+#wrapper {
+	overflow: hidden;
+	min-width: 600px;
+}
+
+#header {
+	overflow: hidden;
+	background-color: #1085c7;
+	height: 30px;
+	width: 100%;
+	padding: 30px 0 15px 10px;
+}
+
+#header p {
+	font-size: 2em;
+	color: #FFF;
+}
+
+#top_menu {
+	overflow: hidden;
+	background-color: #1085c7;
+	width: 100%;
+}
+
+#user_bar {
+	float: right;
+	width: 100px;
+	color: #FFF;
+	font-size: 1.2em;
+	margin-right: 30px;
+	padding-bottom: 10px;
+}
+
+#user_bar a {
+	color: #d9e3ef;
+	text-decoration: underline;
+}
+
+#top_menu ul li {
+	float: left;
+	list-style: none;
+	padding: 3px 5px 3px 5px;
+	margin: 0 0 0 10px;
+	background-color: #d9e3ef;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+#top_menu li.selected {
+	background-color: white;
+}
+
+#content {
+	float: left;
+	margin: 15px 10px 0 10px;
+}
+
+h1 {
+	font-size: 2.5em;
+	margin-bottom: 15px;
+}
+
+p {
+	font-size: 1.2em;
+}
+
+#login_wrapper {
+	float: left;
+	padding: 10px;
+	margin: 50px 0 0 30px;
+	border-style: solid;
+	border-color: #1085c7;
+}
+
+form p {
+	margin-bottom: 10px;
+}
+
+p.flash {
+	border-style: solid;
+	border-width: 3px;
+	margin-bottom: 15px;
+	padding: 5px;
+}
+
+.error {
+	border-color: red;
+}
+
+.notice	{
+	border-color: lime;
+}
