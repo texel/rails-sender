@@ -34,6 +34,7 @@ class Envelope < ActiveRecord::Base
           doc.read
         end
       )
+    ds_document.fileExtension = File.extname(document.path)
         
     ds_envelope.documents = [ds_document]
         

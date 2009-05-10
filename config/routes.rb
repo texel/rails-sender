@@ -13,6 +13,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   
   map.resource :credentials
+  
+  map.resources :envelopes do |envelope|
+    envelope.resource :authentication_tokens
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
 

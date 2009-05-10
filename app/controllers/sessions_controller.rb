@@ -3,8 +3,6 @@ class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   
-  layout "docusign"
-
   skip_before_filter :login_required, :credentials_required
   
   # render new.rhtml

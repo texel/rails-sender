@@ -1,0 +1,39 @@
+<h1>Editing envelope <%= @envelope.id %></h1>
+
+<% form_for(@envelope, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :recipient_name %><br />
+    <%= f.text_field :recipient_name %>
+  </p>
+  <p>
+    <%= f.label :recipient_email %><br />
+    <%= f.text_field :recipient_email %>
+  </p>
+  <p>
+    <%= f.label :subject %><br />
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :email_blurb %><br />
+    <%= f.text_area :email_blurb, :size => '38x5' %>
+  </p>
+  <p>
+    <%= f.label :document %><br />
+    <%= f.file_field :document %>
+  </p>
+  <p>
+    <%= f.label :state %><br />
+    <%= f.select :state, Envelope.aasm_states.map(&:name).map(&:to_s) %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+<hr />
+
+<p>
+  <%= link_to 'Show', @envelope %> |
+  <%= link_to 'Back', envelopes_path %>
+</p>

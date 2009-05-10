@@ -18,5 +18,11 @@ Docusign::Config = HashWithIndifferentAccess.new(YAML.load_file("#{RAILS_ROOT}/c
 # We're using EzCrypto to generate a key which can be used for
 # encoding and decoding user information. We don't want to store
 # user credentials in plaintext. Please replace the following
-# password and salt with something a bit more secure.
+# password and salt with something a bit more secure. Granted,
+# you'll probably want to secure credentials with something stronger
+# than this.
+
 Docusign::Config[:crypt_key] = EzCrypto::Key.with_password "Super Secret", "Salt Taffy"
+
+# Utility module for encrypting and decrypting sensitive Docusign login credentials
+ActiveRecord::Base.extend Encrypter

@@ -1,0 +1,75 @@
+<h1>Showing Envelope <%= @envelope.id %></h1>
+
+<p>
+  <b>Account:</b>
+  <%=h @envelope.account_id %>
+</p>
+
+<p>
+  <b>Recipient Name:</b>
+  <%=h @envelope.recipient_name %>
+</p>
+<p>
+  <b>Recipient Email:</b>
+  <%=h @envelope.recipient_email %>
+</p>
+<p>
+  <b>Subject:</b>
+  <%=h @envelope.subject %>
+</p>
+
+<p>
+  <b>Email blurb:</b>
+  <%=h @envelope.email_blurb %>
+</p>
+
+<p>
+  <b>Document file name:</b>
+  <%=h @envelope.document_file_name %>
+</p>
+
+<p>
+  <b>Document content type:</b>
+  <%=h @envelope.document_content_type %>
+</p>
+
+<p>
+  <b>Document file size:</b>
+  <%=h @envelope.document_file_size %>
+</p>
+
+<p>
+  <b>Document updated at:</b>
+  <%=h @envelope.document_updated_at %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%=h @envelope.state %>
+</p>
+<%- if @envelope.ds_id -%>
+  <p>
+    <b>Docusign ID:</b>
+    <%= @envelope.ds_id %>
+  </p>
+<%- end -%>
+<p>
+  <b>Signing Status:</b>
+  <%- if @envelope.ds_status -%>
+    <%=h @envelope.ds_status %> (last updated <%= @envelope.status_updated_at %>)
+  <%- else -%>
+    n/a
+  <%- end -%>
+</p>
+<hr />
+<p>
+  <%= link_to 'Edit', edit_envelope_path(@envelope) %> |
+  <%= link_to 'Back', envelopes_path %> |
+  <%- if @envelope.pending? -%>
+    <%= link_to 'Send', :action => 'send_envelope', :id => @envelope %>
+  <%- else -%>
+    <%= link_to 'Refresh Status', :action => 'refresh_status', :id => @envelope %> |
+    <%= link_to 'Sign Envelope', new_envelope_authentication_tokens_url(@envelope) %>
+  <%- end -%>
+</p>
+

@@ -3,6 +3,8 @@
 
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
+  
+  layout "docusign"
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   
@@ -18,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
   
   def prepare_user_ds_connection
-    prepare_user_ds_connection(current_user.api_login, current_user.api_password)
+    prepare_ds_connection(current_user.api_login, current_user.api_password)
   end
     
   def prepare_ds_connection(user_name, password)

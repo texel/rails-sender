@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :name, :password, :password_confirmation
 
-
+  encrypts :api_login, :api_password, :api_account_id
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
@@ -47,28 +47,7 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
   
-  def api_login
-    Docusign::Config[:crypt_key].decrypt self[:api_login]
-  end
-  
-  def api_login=(value)
-    self[:api_login] = Docusign::Config[:crypt_key].encrypt value
-  end
-  
-  def api_password
-    Docusign::Config[:crypt_key].decrypt self[:api_password]
-  end
-  
-  def api_password=(value)
-    self[:api_password] = Docusign::Config[:crypt_key].encrypt value
-  end
-  
   def credentials?
-    api_login && api_password
+    [api_login, api_password, api_account_id].all?
   end
-
-  protected
-    
-
-
 end

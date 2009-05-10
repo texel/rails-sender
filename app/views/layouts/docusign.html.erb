@@ -12,7 +12,7 @@
       <div id="top_menu">
         <%- if current_user && current_user.credentials? -%>
         <ul>
-          <li class="<%= "selected" if controller_name == "envelopes" %>">Envelopes</li>
+          <li class="<%= "selected" if ["envelopes", "authentication_tokens"].include? controller_name %>">Envelopes</li>
           <li>Address Book</li>
         </ul>
         <%- end -%>

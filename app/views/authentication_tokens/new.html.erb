@@ -1,0 +1,8 @@
+<h1>Docusign Console Session</h1>
+
+<p>
+  The following link will take you to the Docusign site and allow you to view the contents of this envelope.<br />
+  When you are finished, you may <%= link_to "return to the envelope", @envelope %>.
+</p>
+
+<h2><%= link_to "Continue to Docusign", @token_response.getAuthenticationTokenResult, :target => '_new' %></h2>

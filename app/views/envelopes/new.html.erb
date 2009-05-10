@@ -1,0 +1,30 @@
+<h1>New envelope</h1>
+
+<% form_for(@envelope, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :recipient_name %><br />
+    <%= f.text_field :recipient_name %>
+  </p>
+  <p>
+    <%= f.label :recipient_email %><br />
+    <%= f.text_field :recipient_email %>
+  </p>
+  <p>
+    <%= f.label :subject %><br />
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :email_blurb %><br />
+    <%= f.text_area :email_blurb, :size => "30x5" %>
+  </p>
+  <p>
+    <%= f.label :document %><br />
+    <%= f.file_field :document %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<p><%= link_to 'Back', envelopes_path %></p>

@@ -1,30 +1,37 @@
 <h1>Listing envelopes</h1>
-
-<table>
-  <tr>
-    <th>Recipient</th>
-    <th>Subject</th>
-    <th>Email blurb</th>
-    <th>Document file name</th>
-    <th>Document file size</th>
-    <th>State</th>
-  </tr>
-
-<% @envelopes.each do |envelope| %>
-  <tr>
-    <td><%=h envelope.recipient_email %></td>
-    <td><%=h envelope.subject %></td>
-    <td><%=h envelope.email_blurb %></td>
-    <td><%=h envelope.document_file_name %></td>
-    <td><%=h envelope.document_file_size %></td>
-    <td><%=h envelope.state %></td>
-    <td><%= link_to 'Show', envelope %></td>
-    <td><%= link_to 'Edit', edit_envelope_path(envelope) %></td>
-    <td><%= link_to 'Destroy', envelope, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
+<%- if @envelopes.any? -%>
+  <table cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Recipient</th>
+        <th>Subject</th>
+        <th>Document file name</th>
+        <th>Document file size</th>
+        <th>State</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @envelopes.each do |envelope| %>
+        <tr>
+          <td><%=h envelope.recipient_email %></td>
+          <td><%=h envelope.subject %></td>
+          <td><%=h envelope.document_file_name %></td>
+          <td><%=h envelope.document_file_size %></td>
+          <td><%=h envelope.state %></td>
+          <td>
+            <%= link_to 'Show', envelope %>
+            <%= link_to 'Edit', edit_envelope_path(envelope) %>
+            <%= link_to 'Destroy', envelope, :confirm => 'Are you sure?', :method => :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%- else -%>
+  <p>There are no envelopes to show.</p>
+<%- end -%>
 <br />
-
-<%= link_to 'New envelope', new_envelope_path %>
+<p>
+  <%= link_to 'New envelope', new_envelope_path %>
+</p>

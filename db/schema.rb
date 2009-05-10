@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090510012243) do
+ActiveRecord::Schema.define(:version => 20090510032253) do
 
   create_table "envelopes", :force => true do |t|
     t.string   "account_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20090510012243) do
     t.datetime "remember_token_expires_at"
     t.string   "api_login"
     t.string   "api_password"
+    t.string   "api_account_id"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

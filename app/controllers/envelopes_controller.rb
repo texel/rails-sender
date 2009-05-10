@@ -14,7 +14,6 @@
 # PARTICULAR PURPOSE.
 
 class EnvelopesController < ApplicationController
-  layout "docusign"
   # GET /envelopes
   # GET /envelopes.xml
   def index
@@ -56,7 +55,7 @@ class EnvelopesController < ApplicationController
   # POST /envelopes
   # POST /envelopes.xml
   def create
-    @envelope = Envelope.new(params[:envelope].merge({:account_id => Docusign::Config[:account_id]}))
+    @envelope = Envelope.new(params[:envelope].merge({:user => current_user, :account_id => current_user.api_account_id}))
 
     respond_to do |format|
       if @envelope.save
@@ -94,7 +93,7 @@ class EnvelopesController < ApplicationController
       if @envelope.pending?
         @ds_envelope = @envelope.to_ds_envelope
 
-        prepare_ds_connection
+        prepare_user_ds_connection
 
         @response = @connection.createAndSendEnvelope :envelope => @ds_envelope
                 
@@ -117,7 +116,7 @@ class EnvelopesController < ApplicationController
   def refresh_status
     @envelope = Envelope.find(params[:id])
     
-    prepare_ds_connection
+    prepare_user_ds_connection
     
     @response = @connection.requestStatus :envelopeID => @envelope.ds_id
     @result   = @response.requestStatusResult
