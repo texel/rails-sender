@@ -12,7 +12,9 @@ class Envelope < ActiveRecord::Base
     transitions :from => :pending, :to => :sent
   end        
   
-  belongs_to :user
+  belongs_to :account
+  has_many :recipients
+  accepts_nested_attributes_for :recipients, :allow_destroy => true
       
   has_attached_file :document
   
@@ -21,7 +23,7 @@ class Envelope < ActiveRecord::Base
   def to_ds_envelope
     ds_envelope = Docusign::Envelope.new
     
-    ds_envelope.accountId   = self.account_id
+    ds_envelope.accountId   = self.account.api_id
     ds_envelope.subject     = self.subject
     ds_envelope.emailBlurb  = self.email_blurb
     

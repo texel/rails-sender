@@ -1,0 +1,13 @@
+<h1>Showing Account <%= @account.id %></h1>
+
+<p>
+  <b>Account:</b>
+  <%=h @account.api_id %>
+</p>
+
+<hr />
+<p>
+  <%= link_to 'Edit', edit_account_path(@account) %> |
+  <%= link_to 'Back', accounts_path %>
+</p>
+

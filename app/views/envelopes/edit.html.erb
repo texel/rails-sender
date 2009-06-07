@@ -34,6 +34,6 @@
 <hr />
 
 <p>
-  <%= link_to 'Show', @envelope %> |
-  <%= link_to 'Back', envelopes_path %>
+  <%= link_to 'Show', account_envelope_path(@account, @envelope) %> |
+  <%= link_to 'Back', account_envelopes_path(@account) %>
 </p>

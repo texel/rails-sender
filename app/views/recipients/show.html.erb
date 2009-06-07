@@ -1,0 +1,23 @@
+<p>
+  <b>Envelope:</b>
+  <%=h @recipient.envelope_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @recipient.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @recipient.email %>
+</p>
+
+<p>
+  <b>Role:</b>
+  <%=h @recipient.role %>
+</p>
+
+
+<%= link_to 'Edit', edit_recipient_path(@recipient) %> |
+<%= link_to 'Back', recipients_path %>

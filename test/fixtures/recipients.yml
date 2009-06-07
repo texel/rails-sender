@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  envelope_id: 1
+  name: MyString
+  email: MyString
+  role: MyString
+
+two:
+  envelope_id: 1
+  name: MyString
+  email: MyString
+  role: MyString

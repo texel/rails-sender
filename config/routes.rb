@@ -1,18 +1,19 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :envelopes
+  map.resources :recipients
 
-  map.root :controller => 'envelopes', :action => 'index'
+
+  map.root :controller => 'accounts', :action => 'index'
   
   map.logout    '/logout',    :controller => 'sessions',  :action => 'destroy'
   map.login     '/login',     :controller => 'sessions',  :action => 'new'
   map.register  '/register',  :controller => 'users',     :action => 'create'
   map.signup    '/signup',    :controller => 'users',     :action => 'new'
   
-  map.resources :users, :has_many => [:envelopes]
+  map.resources :users
 
   map.resource :session
   
-  map.resource :credentials
+  map.resources :accounts, :has_many => [:envelopes]
   
   map.resources :envelopes do |envelope|
     envelope.resource :authentication_tokens

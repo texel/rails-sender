@@ -63,8 +63,8 @@
 </p>
 <hr />
 <p>
-  <%= link_to 'Edit', edit_envelope_path(@envelope) %> |
-  <%= link_to 'Back', envelopes_path %> |
+  <%= link_to 'Edit', edit_account_envelope_path(@account, @envelope) %> |
+  <%= link_to 'Back', account_envelopes_path(@account) %> |
   <%- if @envelope.pending? -%>
     <%= link_to 'Send', :action => 'send_envelope', :id => @envelope %>
   <%- else -%>

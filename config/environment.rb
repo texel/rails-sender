@@ -15,7 +15,7 @@ Rails::Initializer.run do |config|
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
   # Specify gems that this application depends on and have them installed with rake gems:install
-  config.gem "texel-docusign", :version => '>=0.2.31', :source => 'http://gems.github.com', :lib => 'docusign'
+  config.gem "texel-docusign", :version => '>=0.3', :source => 'http://gems.github.com', :lib => 'docusign'
   config.gem 'thoughtbot-shoulda', :source => 'http://gems.github.com', :lib => 'shoulda'
   config.gem 'ezcrypto'
   config.gem "rubyist-aasm",    :lib => "aasm", :source => 'http://gems.github.com'

@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  api_id: MyString
+  api_name: MyString
+  api_password: MyString
+  api_email: MyString
+  api_user_name: MyString
+  user_id: 1
+
+two:
+  api_id: MyString
+  api_name: MyString
+  api_password: MyString
+  api_email: MyString
+  api_user_name: MyString
+  user_id: 1

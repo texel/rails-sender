@@ -14,7 +14,7 @@ class CreateEnvelopes < ActiveRecord::Migration
       t.string    :ds_status
       t.datetime  :status_updated_at
       t.string    :state
-      t.integer   :user_id
+      t.integer   :credential_id
       
       t.timestamps
     end

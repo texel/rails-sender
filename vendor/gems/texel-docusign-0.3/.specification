@@ -1,7 +1,7 @@
 --- !ruby/object:Gem::Specification 
 name: texel-docusign
 version: !ruby/object:Gem::Version 
-  version: 0.2.32
+  version: "0.3"
 platform: ruby
 authors: 
 - Leigh Caplan
@@ -47,6 +47,9 @@ files:
 - lib/docusign/docusign.rb
 - lib/docusign/docusignDriver.rb
 - lib/docusign/docusignMappingRegistry.rb
+- lib/docusign/credential.rb
+- lib/docusign/credentialDriver.rb
+- lib/docusign/credentialMappingRegistry.rb
 - tasks/docusign_tasks.rake
 - test/test_docusign.rb
 has_rdoc: true

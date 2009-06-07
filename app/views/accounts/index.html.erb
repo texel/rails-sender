@@ -1,0 +1,33 @@
+<h1>Listing Accounts</h1>
+<%- if @accounts.any? -%>
+  <table cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Envelopes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @accounts.each do |account| %>
+        <tr>
+          <td><%=h account.api_name %></td>
+          <td><%=h account.api_email %></td>
+          <td><%= link_to account.envelopes.size, account_envelopes_url(account) %></td>
+          <td>
+            <%= link_to 'Show', account %>
+            <%= link_to 'Edit', edit_account_path(account) %>
+            <%= link_to 'Destroy', account, :confirm => 'Are you sure?', :method => :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%- else -%>
+  <p>There are no accounts to show.</p>
+<%- end -%>
+<br />
+<p>
+  <%= link_to 'New account', new_account_path %>
+</p>

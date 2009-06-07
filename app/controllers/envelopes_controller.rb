@@ -16,8 +16,10 @@
 class EnvelopesController < ApplicationController
   # GET /envelopes
   # GET /envelopes.xml
+  before_filter :find_account
+  
   def index
-    @envelopes = current_user.envelopes.all
+    @envelopes = @account.envelopes.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -55,12 +57,12 @@ class EnvelopesController < ApplicationController
   # POST /envelopes
   # POST /envelopes.xml
   def create
-    @envelope = Envelope.new(params[:envelope].merge({:user => current_user, :account_id => current_user.api_account_id}))
+    @envelope = @account.envelopes.build(params[:envelope])
 
     respond_to do |format|
       if @envelope.save
         flash[:notice] = 'Envelope was successfully created.'
-        format.html { redirect_to(@envelope) }
+        format.html { redirect_to(account_envelope_url(@account, @envelope)) }
         format.xml  { render :xml => @envelope, :status => :created, :location => @envelope }
       else
         format.html { render :action => "new" }
@@ -138,5 +140,11 @@ class EnvelopesController < ApplicationController
       format.html { redirect_to(envelopes_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  protected
+  
+  def find_account
+    redirect_to root_url and return false unless @account = Account.find(params[:account_id])
   end
 end

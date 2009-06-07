@@ -9,7 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090510032253) do
+ActiveRecord::Schema.define(:version => 20090607192551) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "api_id"
+    t.string   "api_name"
+    t.string   "api_password"
+    t.string   "api_email"
+    t.string   "api_user_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "envelopes", :force => true do |t|
     t.string   "account_id"
@@ -25,7 +36,16 @@ ActiveRecord::Schema.define(:version => 20090510032253) do
     t.string   "ds_status"
     t.datetime "status_updated_at"
     t.string   "state"
-    t.integer  "user_id"
+    t.integer  "credential_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recipients", :force => true do |t|
+    t.integer  "envelope_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

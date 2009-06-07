@@ -12,27 +12,17 @@
 # KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
 # PARTICULAR PURPOSE.
-
-module Docusign
-  class Base
-    
-    class << self    
-      def login(options={})
-        
-        connection  = Docusign::APIServiceSoap.new
-        header = AuthHeaderHandler.new(
-          :user_name => options.delete(:user_name), 
-          :password  => options.delete(:password)
-        )
-        
-        connection.headerhandler << header
-        
-        options.each do |key, value|
-          connection.send("#{key}=", value)
-        end
-        
-        connection
-      end
-    end
-  end
-end
+		 
+$LOAD_PATH << File.expand_path(File.dirname(__FILE__))
+ 
+gem 'soap4r'
+require 'docusign/docusign'
+require 'docusign/docusignMappingRegistry'
+require 'docusign/docusignDriver'
+require 'docusign/base'
+require 'docusign/auth_header_handler'
+require 'docusign/credential'
+require 'docusign/credentialDriver'
+require 'docusign/credentialMappingRegistry'
+ 
+Docusign::VERSION = '0.2'

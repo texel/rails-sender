@@ -1,2 +1,3 @@
 development:
   default_endpoint_url: 'https://demo.docusign.net/api/3.0/api.asmx'
+  credential_endpoint_url: 'https://demo.docusign.net/api/3.0/Credential.asmx'

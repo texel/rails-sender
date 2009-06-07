@@ -11,13 +11,9 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
   
-  before_filter :login_required, :credentials_required
+  before_filter :login_required
   
   protected
-  
-  def credentials_required
-    redirect_to new_credentials_url and return false unless current_user && current_user.credentials?
-  end
   
   def prepare_user_ds_connection
     prepare_ds_connection(current_user.api_login, current_user.api_password)
