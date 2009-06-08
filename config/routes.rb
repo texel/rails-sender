@@ -15,9 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :accounts, :has_many => [:envelopes]
   
-  map.resources :envelopes do |envelope|
-    envelope.resource :authentication_tokens
-  end
+  map.resources :envelopes, :has_many => [:authentication_tokens, :recipients]
 
   # The priority is based upon order of creation: first created -> highest priority.
 

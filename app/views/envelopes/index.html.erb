@@ -21,8 +21,9 @@
           <td><%=h envelope.state %></td>
           <td>
             <%= link_to 'Show', account_envelope_url(@account, envelope) %>
-            <%= link_to 'Edit', edit_account_envelope_path(@account,envelope) %>
+            <%= link_to 'Edit', edit_account_envelope_url(@account, envelope) %>
             <%= link_to 'Destroy', envelope, :confirm => 'Are you sure?', :method => :delete %>
+            <%= link_to 'Add Recipients', new_envelope_recipient_url(envelope) %>
           </td>
         </tr>
       <% end %>

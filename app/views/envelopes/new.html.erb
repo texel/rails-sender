@@ -2,16 +2,6 @@
 
 <% form_for(@envelope, :url => account_envelopes_url(@account), :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
-  <%- f.fields_for :recipients do |recipient| -%>
-    <p>
-      <%= recipient.label :name %><br />
-      <%= recipient.text_field :name %>
-    </p>
-    <p>
-      <%= recipient.label :email %><br />
-      <%= recipient.text_field :email %>
-    </p>
-  <%- end -%>
   <p>
     <%= f.label :subject %><br />
     <%= f.text_field :subject %>

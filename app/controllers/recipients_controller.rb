@@ -1,4 +1,5 @@
 class RecipientsController < ApplicationController
+  before_filter :find_envelope
   # GET /recipients
   # GET /recipients.xml
   def index
@@ -40,12 +41,12 @@ class RecipientsController < ApplicationController
   # POST /recipients
   # POST /recipients.xml
   def create
-    @recipient = Recipient.new(params[:recipient])
+    @recipient = @envelope.recipients.build(params[:recipient])
 
     respond_to do |format|
       if @recipient.save
         flash[:notice] = 'Recipient was successfully created.'
-        format.html { redirect_to(@recipient) }
+        format.html { redirect_to(account_envelope_url(@envelope.account, @envelope)) }
         format.xml  { render :xml => @recipient, :status => :created, :location => @recipient }
       else
         format.html { render :action => "new" }
@@ -78,8 +79,14 @@ class RecipientsController < ApplicationController
     @recipient.destroy
 
     respond_to do |format|
-      format.html { redirect_to(recipients_url) }
+      format.html { redirect_to(account_envelope_url(@envelope.account, @envelope)) }
       format.xml  { head :ok }
     end
+  end
+  
+  protected
+  
+  def find_envelope
+    redirect_to root_url and return false unless @envelope = current_user.envelopes.find(params[:envelope_id])
   end
 end

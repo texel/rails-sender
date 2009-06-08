@@ -14,11 +14,14 @@ class Envelope < ActiveRecord::Base
   
   belongs_to :account
   has_many :recipients
-  accepts_nested_attributes_for :recipients, :allow_destroy => true
       
   has_attached_file :document
   
-  validates_presence_of :account_id, :recipient_email, :recipient_name, :subject
+  validates_presence_of :account_id, :subject
+  
+  def sendable?
+    pending? && recipients.any?
+  end
     
   def to_ds_envelope
     ds_envelope = Docusign::Envelope.new
@@ -39,15 +42,18 @@ class Envelope < ActiveRecord::Base
     ds_document.fileExtension = File.extname(document.path)
         
     ds_envelope.documents = [ds_document]
-        
-    ds_recipient = Docusign::Recipient.new
-    ds_recipient.email       = self.recipient_email
-    ds_recipient.userName    = self.recipient_name
-    ds_recipient.type        = Docusign::RecipientTypeCode::Signer
-    ds_recipient.iD          = self.id
-    ds_recipient.requireIDLookup = false
     
-    ds_envelope.recipients = [ds_recipient]
+    ds_envelope.recipients = 
+      recipients.map do |recipient|
+        ds_recipient = Docusign::Recipient.new
+        ds_recipient.email       = recipient.email
+        ds_recipient.userName    = recipient.name
+        ds_recipient.type        = Docusign::RecipientTypeCode::Signer
+        ds_recipient.iD          = recipient.id
+        ds_recipient.requireIDLookup = false
+
+        ds_recipient
+      end   
     
     ds_envelope
   end

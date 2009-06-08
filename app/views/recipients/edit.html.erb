@@ -24,5 +24,9 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @recipient %> |
-<%= link_to 'Back', recipients_path %>
+<hr />
+
+<p>
+  <%= link_to 'Show', @recipient %> |
+  <%= link_to 'Back', account_envelope_url(@envelope.account, @envelope) %>
+</p>

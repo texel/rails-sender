@@ -2,17 +2,9 @@
 
 <p>
   <b>Account:</b>
-  <%=h @envelope.account_id %>
+  <%=h @envelope.account.api_name %>
 </p>
 
-<p>
-  <b>Recipient Name:</b>
-  <%=h @envelope.recipient_name %>
-</p>
-<p>
-  <b>Recipient Email:</b>
-  <%=h @envelope.recipient_email %>
-</p>
 <p>
   <b>Subject:</b>
   <%=h @envelope.subject %>
@@ -61,13 +53,24 @@
     n/a
   <%- end -%>
 </p>
+
+<p>
+  <b>Recipients:</b>
+  <%= link_to 'Add', new_envelope_recipient_url(@envelope) %>
+  
+  <%- if @envelope.recipients.any? -%>
+    <%= render :partial => 'recipients/table', :locals => {:recipients => @envelope.recipients} %>
+  <%- end -%>
+</p>
 <hr />
 <p>
   <%= link_to 'Edit', edit_account_envelope_path(@account, @envelope) %> |
-  <%= link_to 'Back', account_envelopes_path(@account) %> |
-  <%- if @envelope.pending? -%>
-    <%= link_to 'Send', :action => 'send_envelope', :id => @envelope %>
-  <%- else -%>
+  <%= link_to 'Back', account_envelopes_path(@account) %>
+  <%- if @envelope.sendable? -%>
+    |
+    <%= link_to 'Send', :action => 'send_envelope', :id => @envelope, :account_id => @account %>
+  <%- elsif @envelope.sent? -%>
+    |
     <%= link_to 'Refresh Status', :action => 'refresh_status', :id => @envelope %> |
     <%= link_to 'Sign Envelope', new_envelope_authentication_tokens_url(@envelope) %>
   <%- end -%>

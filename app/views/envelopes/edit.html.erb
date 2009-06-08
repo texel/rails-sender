@@ -1,16 +1,7 @@
 <h1>Editing envelope <%= @envelope.id %></h1>
 
-<% form_for(@envelope, :html => {:multipart => true}) do |f| %>
+<% form_for(@envelope, :url => account_envelope_url(@account, @envelope), :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
-
-  <p>
-    <%= f.label :recipient_name %><br />
-    <%= f.text_field :recipient_name %>
-  </p>
-  <p>
-    <%= f.label :recipient_email %><br />
-    <%= f.text_field :recipient_email %>
-  </p>
   <p>
     <%= f.label :subject %><br />
     <%= f.text_field :subject %>

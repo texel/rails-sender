@@ -17,6 +17,7 @@ class EnvelopesController < ApplicationController
   # GET /envelopes
   # GET /envelopes.xml
   before_filter :find_account
+  before_filter :find_envelope, :except => [:new, :create]
   
   def index
     @envelopes = @account.envelopes.all
@@ -30,8 +31,6 @@ class EnvelopesController < ApplicationController
   # GET /envelopes/1
   # GET /envelopes/1.xml
   def show
-    @envelope = Envelope.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @envelope }
@@ -42,6 +41,7 @@ class EnvelopesController < ApplicationController
   # GET /envelopes/new.xml
   def new
     @envelope = Envelope.new
+    @envelope.recipients.build if @envelope.recipients.blank?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -74,12 +74,12 @@ class EnvelopesController < ApplicationController
   # PUT /envelopes/1
   # PUT /envelopes/1.xml
   def update
-    @envelope = Envelope.find(params[:id])
+    @envelope = @account.envelopes.find(params[:id])
 
     respond_to do |format|
       if @envelope.update_attributes(params[:envelope])
         flash[:notice] = 'Envelope was successfully updated.'
-        format.html { redirect_to(@envelope) }
+        format.html { redirect_to(account_envelope_url(@account, @envelope)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -89,25 +89,23 @@ class EnvelopesController < ApplicationController
   end
   
   def send_envelope
-    @envelope = Envelope.find(params[:id])
+    @envelope = @account.envelopes.find(params[:id])
     
     respond_to do |wants|
       if @envelope.pending?
         @ds_envelope = @envelope.to_ds_envelope
 
-        prepare_user_ds_connection
-
-        @response = @connection.createAndSendEnvelope :envelope => @ds_envelope
+        @response = @account.connection.createAndSendEnvelope :envelope => @ds_envelope
                 
         if @response.is_a?(Docusign::CreateAndSendEnvelopeResponse)
           @result = @response.createAndSendEnvelopeResult
           @envelope.ds_id = @result.envelopeID
-          @envelope.ds_status = @result.status # We're only tracking one signer with this app.
+          @envelope.ds_status = @result.status
           @envelope.status_updated_at = Time.now
           @envelope.send_envelope! # Trigger state change
         end
         
-        wants.html { redirect_to @envelope }
+        wants.html { redirect_to account_envelope_url(@account, @envelope) }
       else
         flash[:error] = "Envelope was already sent!"
         wants.html { redirect_to :action => 'index' }
@@ -118,9 +116,7 @@ class EnvelopesController < ApplicationController
   def refresh_status
     @envelope = Envelope.find(params[:id])
     
-    prepare_user_ds_connection
-    
-    @response = @connection.requestStatus :envelopeID => @envelope.ds_id
+    @response = @account.connection.requestStatus :envelopeID => @envelope.ds_id
     @result   = @response.requestStatusResult
     @envelope.ds_status = @result.status
     @envelope.status_updated_at = Time.now
@@ -145,6 +141,10 @@ class EnvelopesController < ApplicationController
   protected
   
   def find_account
-    redirect_to root_url and return false unless @account = Account.find(params[:account_id])
+    redirect_to root_url and return false unless @account = current_user.accounts.find(params[:account_id])
+  end
+  
+  def find_envelope
+    @envelope = @account.envelopes.find(params[:id])
   end
 end

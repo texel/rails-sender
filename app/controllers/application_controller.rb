@@ -13,17 +13,4 @@ class ApplicationController < ActionController::Base
   
   before_filter :login_required
   
-  protected
-  
-  def prepare_user_ds_connection
-    prepare_ds_connection(current_user.api_login, current_user.api_password)
-  end
-    
-  def prepare_ds_connection(user_name, password)
-    @connection = Docusign::Base.login(
-      :user_name    => user_name,
-      :password     => password,
-      :endpoint_url => Docusign::Config[:default_endpoint_url]
-    )
-  end
 end
