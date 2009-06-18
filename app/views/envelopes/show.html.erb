@@ -71,8 +71,7 @@
     <%= link_to 'Send', :action => 'send_envelope', :id => @envelope, :account_id => @account %>
   <%- elsif @envelope.sent? -%>
     |
-    <%= link_to 'Refresh Status', :action => 'refresh_status', :id => @envelope %> |
-    <%= link_to 'Sign Envelope', new_envelope_authentication_tokens_url(@envelope) %>
+    <%= link_to 'Refresh Status', :action => 'refresh_status', :id => @envelope, :account_id => @account %>
   <%- end -%>
 </p>
 

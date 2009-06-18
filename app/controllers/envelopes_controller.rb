@@ -17,7 +17,7 @@ class EnvelopesController < ApplicationController
   # GET /envelopes
   # GET /envelopes.xml
   before_filter :find_account
-  before_filter :find_envelope, :except => [:new, :create]
+  before_filter :find_envelope, :except => [:index, :new, :create]
   
   def index
     @envelopes = @account.envelopes.all
@@ -120,9 +120,10 @@ class EnvelopesController < ApplicationController
     @result   = @response.requestStatusResult
     @envelope.ds_status = @result.status
     @envelope.status_updated_at = Time.now
+    @envelope.save
     
     respond_to do |wants|
-      wants.html { render :action => 'show' }
+      wants.html { redirect_to account_envelope_url(@account, @envelope) }
     end
   end
 
