@@ -5,8 +5,7 @@
 
 2) $ rake gems:install
 
-3) Rename RAILS_ROOT/config/docusign.example.yml => docusign.yml
-   and, if necessary, change the endpoint urls.
+3) Rename RAILS_ROOT/config/docusign.example.yml => docusign.yml and, if necessary, change the endpoint urls.
    
 4) $ rake db:migrate
 
