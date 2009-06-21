@@ -1,0 +1,28 @@
+== Docusign Example App
+
+== Setup
+1) $ gem sources -a http://gems.github.com (you only have to do this once)
+
+2) $ rake gems:install
+
+3) Rename RAILS_ROOT/config/docusign.example.yml => docusign.yml
+   and, if necessary, change the endpoint urls.
+   
+4) $ rake db:migrate
+
+5) $ ruby script/server
+
+== Copyright (C) DocuSign, Inc. All rights reserved.
+
+This source code is intended only as a supplement to DocuSign SDK 
+and/or on-line documentation.
+
+This sample is designed to demonstrate DocuSign features and is not intended 
+for production use. Code and policy for a production application must be 
+developed to meet the specific data and security requirements of the 
+application.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
