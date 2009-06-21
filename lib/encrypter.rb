@@ -11,11 +11,11 @@ module Encrypter
     args.each do |arg|
       class_eval <<-EOS
         def #{arg}
-          Docusign::Config[:crypt_key].decrypt64 self[:#{arg}] if self[:#{arg}]
+          self[:#{arg}].blank? ? self[:#{arg}] : Docusign::Config[:crypt_key].decrypt64(self[:#{arg}])
         end
         
         def #{arg}=(value)
-          self[:#{arg}] = Docusign::Config[:crypt_key].encrypt64 value
+          self[:#{arg}] = value.blank? ? value : Docusign::Config[:crypt_key].encrypt64(value)
         end
       EOS
     end

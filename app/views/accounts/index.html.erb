@@ -16,6 +16,7 @@
           <td><%=h account.api_email %></td>
           <td><%= link_to account.envelopes.size, account_envelopes_url(account) %></td>
           <td>
+            <%= link_to 'List Envelopes', account_envelopes_url(account) %>
             <%= link_to 'Show', account %>
             <%= link_to 'Edit', edit_account_path(account) %>
             <%= link_to 'Destroy', account, :confirm => 'Are you sure?', :method => :delete %>

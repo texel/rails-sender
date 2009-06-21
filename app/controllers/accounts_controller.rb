@@ -71,12 +71,11 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if !accounts.blank? && accounts.map(&:valid?).all? && accounts.map(&:save).all?
-        flash[:notice] = 'account was successfully created.'
+        flash[:notice] = "#{accounts.size == 1 ? 'Account was' : "#{accounts.size} accounts were"} successfully created."
         format.html { redirect_to(@account) }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
-        flash[:error] = "There were problems saving your account information. Please try again."
-        format.html { redirect_to :action => "new" }
+        format.html { render :action => "new" }
         format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
       end
     end
@@ -112,7 +111,12 @@ class AccountsController < ApplicationController
   protected
   
   def accounts_from_credentials(email, password)
-    # First pass, just take the first account we get, if any.
-    Docusign::Base.credentials(email, password, Docusign::Config[:credential_endpoint_url]).accounts
+    result = Docusign::Base.credentials(email, password, Docusign::Config[:credential_endpoint_url])
+    if result.success?
+      result.accounts
+    else
+      flash[:error] = result.authenticationMessage
+      []
+    end
   end
 end

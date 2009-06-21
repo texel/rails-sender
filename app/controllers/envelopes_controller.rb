@@ -95,7 +95,7 @@ class EnvelopesController < ApplicationController
       if @envelope.pending?
         @ds_envelope = @envelope.to_ds_envelope
 
-        @response = @account.connection.createAndSendEnvelope :envelope => @ds_envelope
+        @response = @account.ds_connection.createAndSendEnvelope :envelope => @ds_envelope
                 
         if @response.is_a?(Docusign::CreateAndSendEnvelopeResponse)
           @result = @response.createAndSendEnvelopeResult
@@ -116,7 +116,7 @@ class EnvelopesController < ApplicationController
   def refresh_status
     @envelope = Envelope.find(params[:id])
     
-    @response = @account.connection.requestStatus :envelopeID => @envelope.ds_id
+    @response = @account.ds_connection.requestStatus :envelopeID => @envelope.ds_id
     @result   = @response.requestStatusResult
     @envelope.ds_status = @result.status
     @envelope.status_updated_at = Time.now
