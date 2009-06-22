@@ -56,7 +56,7 @@
 
 <p>
   <b>Recipients:</b>
-  <%= link_to 'Add', new_envelope_recipient_url(@envelope) %>
+  <%= link_to 'Add', new_envelope_recipient_url(@envelope) if @envelope.pending? %>
   
   <%- if @envelope.recipients.any? -%>
     <%= render :partial => 'recipients/table', :locals => {:recipients => @envelope.recipients} %>

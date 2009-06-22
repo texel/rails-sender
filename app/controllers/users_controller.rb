@@ -44,5 +44,9 @@ class UsersController < ApplicationController
   
   def show
     @user = current_user
+    
+    respond_to do |wants|
+      wants.html { redirect_to accounts_url }
+    end
   end
 end

@@ -15,6 +15,7 @@
 
 class RecipientsController < ApplicationController
   before_filter :find_envelope
+  before_filter :ensure_envelope_pending, :only => [:new, :create, :edit, :update]
   # GET /recipients
   # GET /recipients.xml
   def index
@@ -103,5 +104,12 @@ class RecipientsController < ApplicationController
   
   def find_envelope
     redirect_to root_url and return false unless @envelope = current_user.envelopes.find(params[:envelope_id])
+  end
+  
+  def ensure_envelope_pending
+    unless @envelope.pending?
+      flash[:error] = "You cannot modify recipients for a sent envelope!"
+      redirect_to account_envelope_url(@envelope.account, @envelope) and return false
+    end
   end
 end

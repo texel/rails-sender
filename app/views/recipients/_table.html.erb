@@ -14,9 +14,11 @@
         <td><%=h recipient.email %></td>
         <td><%=h recipient.role %></td>
         <td>
-          <%= link_to 'Show', recipient %>
-          <%= link_to 'Edit', edit_envelope_recipient_url(recipient.envelope, recipient) %>
-          <%= link_to 'Destroy', envelope_recipient_url(recipient.envelope, recipient), :confirm => 'Are you sure?', :method => :delete %>
+          <%= link_to 'Show', envelope_recipient_url(recipient.envelope, recipient) %>
+          <%- if recipient.envelope.pending? -%>
+            <%= link_to 'Edit', edit_envelope_recipient_url(recipient.envelope, recipient) %>
+            <%= link_to 'Destroy', envelope_recipient_url(recipient.envelope, recipient), :confirm => 'Are you sure?', :method => :delete %>
+          <%- end -%>
         </td>
       </tr>
     <% end %>

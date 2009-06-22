@@ -19,5 +19,9 @@
 </p>
 
 
-<%= link_to 'Edit', edit_recipient_path(@recipient) %> |
-<%= link_to 'Back', recipients_path %>
+<p>
+  <%- unless @recipient.envelope && @recipient.envelope.sent? -%>
+    <%= link_to 'Edit', edit_envelope_recipient_path(@recipient.envelope, @recipient) %> |
+  <%- end -%>
+  <%= link_to 'Back', account_envelope_path(@recipient.envelope.account, @recipient.envelope) %>
+</p>
