@@ -1,5 +1,5 @@
-<h1>Listing Accounts</h1>
 <%- if @accounts.any? -%>
+<h1>Listing Docusign Accounts</h1>
   <table cellpadding="0" cellspacing="0">
     <thead>
       <tr>
@@ -25,10 +25,14 @@
       <% end %>
     </tbody>
   </table>
+  
+  <br />
+  <p>
+    <%= link_to 'Add new Docusign Account(s)', new_account_path %>
+  </p>
 <%- else -%>
-  <p>There are no accounts to show.</p>
+  <h1>There are no Docusign Accounts to show</h1>
+  <p>
+    You may <%= link_to 'associate', new_account_path %> one or more Docusign accounts with this application.
+  </p>
 <%- end -%>
-<br />
-<p>
-  <%= link_to 'New account', new_account_path %>
-</p>
