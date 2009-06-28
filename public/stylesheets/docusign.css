@@ -121,6 +121,10 @@ p.flash {
 	border-color: lime;
 }
 
+.info	{
+	border-color: #1085c7;
+}
+
 table {
 	border: 1px solid #1085c7;
 }

@@ -79,7 +79,7 @@ class RecipientsController < ApplicationController
     respond_to do |format|
       if @recipient.update_attributes(params[:recipient])
         flash[:notice] = 'Recipient was successfully updated.'
-        format.html { redirect_to(@recipient) }
+        format.html { redirect_to account_envelope_url(@envelope.account, @envelope) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

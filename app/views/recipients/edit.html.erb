@@ -1,26 +1,11 @@
 <h1>Editing recipient</h1>
 
-<% form_for(@recipient) do |f| %>
+<% form_for(@recipient, :url => envelope_recipient_url(@envelope, @recipient)) do |f| %>
   <%= f.error_messages %>
 
+  <%= render :partial => 'form', :locals => {:f => f} %>
   <p>
-    <%= f.label :envelope_id %><br />
-    <%= f.text_field :envelope_id %>
-  </p>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :role %><br />
-    <%= f.text_field :role %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Save' %>
   </p>
 <% end %>
 

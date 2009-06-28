@@ -19,6 +19,7 @@ Rails::Initializer.run do |config|
   config.gem 'thoughtbot-shoulda', :source => 'http://gems.github.com', :lib => 'shoulda'
   config.gem 'ezcrypto'
   config.gem "rubyist-aasm",    :lib => "aasm", :source => 'http://gems.github.com'
+  config.gem 'nokogiri'
   
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"

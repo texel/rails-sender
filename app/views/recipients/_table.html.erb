@@ -4,6 +4,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Role</th>
+      <th>Type</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -13,11 +14,12 @@
         <td><%=h recipient.name %></td>
         <td><%=h recipient.email %></td>
         <td><%=h recipient.role %></td>
+        <td><%=h recipient.recipient_type.titleize %></td>
         <td>
           <%= link_to 'Show', envelope_recipient_url(recipient.envelope, recipient) %>
           <%- if recipient.envelope.pending? -%>
             <%= link_to 'Edit', edit_envelope_recipient_url(recipient.envelope, recipient) %>
-            <%= link_to 'Destroy', envelope_recipient_url(recipient.envelope, recipient), :confirm => 'Are you sure?', :method => :delete %>
+            <%= link_to 'Destroy', envelope_recipient_url(recipient.envelope, recipient), :confirm => 'Are you sure?', :method => :delete unless recipient.for_template? %>
           <%- end -%>
         </td>
       </tr>

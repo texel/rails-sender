@@ -1,4 +1,4 @@
-<%- [:error, :notice].each do |flash_key| -%>
+<%- [:error, :notice, :info].each do |flash_key| -%>
   <%- if flash[flash_key] -%>
     <p class="flash <%= flash_key %>">
       <%= flash[flash_key] %>

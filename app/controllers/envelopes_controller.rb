@@ -17,7 +17,7 @@ class EnvelopesController < ApplicationController
   # GET /envelopes
   # GET /envelopes.xml
   before_filter :find_account
-  before_filter :find_envelope, :except => [:index, :new, :create]
+  before_filter :find_envelope, :template_message, :except => [:index, :new, :create]
   
   def index
     @envelopes = @account.envelopes.all
@@ -147,5 +147,11 @@ class EnvelopesController < ApplicationController
   
   def find_envelope
     @envelope = @account.envelopes.find(params[:id])
+  end
+  
+  def template_message
+    if @envelope.has_template? && !@envelope.sendable?
+      flash[:info] = "This envelope was created from a template. In order to send it, you must finish filling in recipient information."
+    end
   end
 end

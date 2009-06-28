@@ -5,7 +5,7 @@ one:
   api_name: MyString
   api_password: MyString
   api_email: MyString
-  api_user_name: MyString
+  api_user_id: MyString
   user_id: 1
 
 two:
@@ -13,5 +13,5 @@ two:
   api_name: MyString
   api_password: MyString
   api_email: MyString
-  api_user_name: MyString
+  api_user_id: MyString
   user_id: 1
